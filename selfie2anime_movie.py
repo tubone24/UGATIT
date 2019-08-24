@@ -206,6 +206,7 @@ class UGATIT(object) :
     def movie(self):
         if args.device == 'normal_cam':
             cam = cv2.VideoCapture(0)
+            # cam = cv2.VideoCapture("test.mp4")
         elif args.device == 'jetson_nano_raspi_cam':
             GST_STR = 'nvarguscamerasrc \
                 ! video/x-raw(memory:NVMM), width=3280, height=2464, format=(string)NV12, framerate=(fraction)30/1 \
@@ -276,7 +277,8 @@ class UGATIT(object) :
                     sample_image = np.asarray(load_test_data(sample_file, size=self.img_size))
                     fake_img = self.sess.run(self.test_fake_B, feed_dict = {self.test_domain_A : sample_image})
                     fake_img = inverse_transform(fake_img)
-                    fake_img = cv2.cvtColor(fake_img[0].astype('uint8'), cv2.COLOR_RGB2BGR)
+                    fake_img = merge(fake_img, [1,1])
+                    fake_img = cv2.cvtColor(fake_img.astype('uint8'), cv2.COLOR_RGB2BGR)
                     cv2.imshow(window_name, fake_img)
 
         print("end")
