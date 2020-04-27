@@ -209,7 +209,7 @@ class UGATIT(object) :
             # cam = cv2.VideoCapture("test.mp4")
         elif args.device == 'jetson_nano_raspi_cam':
             GST_STR = 'nvarguscamerasrc \
-                ! video/x-raw(memory:NVMM), width=3280, height=2464, format=(string)NV12, framerate=(fraction)30/1 \
+                ! video/x-raw(memory:NVMM), width=3280, height=2464, format=(string)NV12, framerate=(fraction)21/1 \
                 ! nvvidconv ! video/x-raw, width=(int)1920, height=(int)1080, format=(string)BGRx \
                 ! videoconvert \
                 ! appsink'
